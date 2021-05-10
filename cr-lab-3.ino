@@ -26,7 +26,9 @@ void applyPower(int power, int motor){
   }
 }
 
-int speed = 50;
+int speed = 60;
+int currentState = 3;
+int previousState = 3;
 
 void goRight(){
   Serial.print("Going Right");
@@ -53,18 +55,29 @@ void setup() {
 }
 
 void loop() {
-  int sensorstate = linefollower.readSensors();
-  switch(sensorstate){
+  
+  currentState = linefollower.readSensors();
+  switch(currentState){
     case 0:
-      goBack();
+      Serial.print(previousState);
+      if(previousState == 1){
+        goRight();
+      }else if(previousState == 2){
+        goLeft();
+      }else if(previousState == 3){
+        goBack();
+      }
       break;
     case 1:
+      previousState = currentState;
       goLeft();
       break;
     case 2:
+       previousState = currentState;
       goRight();
       break;
     case 3:
+      previousState = currentState;
       goForward();
   }
 }
