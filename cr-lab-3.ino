@@ -4,8 +4,8 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 
-MeDCMotor rightMotor(9); 
-MeDCMotor leftMotor(10);
+MeDCMotor rightMotor(10); 
+MeDCMotor leftMotor(9);
 
 MeLineFollower linefollower(2);
 
@@ -59,25 +59,16 @@ void loop() {
   currentState = linefollower.readSensors();
   switch(currentState){
     case 0:
-      Serial.print(previousState);
-      if(previousState == 1){
-        goRight();
-      }else if(previousState == 2){
-        goLeft();
-      }else if(previousState == 3){
-        goBack();
-      }
+      goBack();
       break;
     case 1:
       previousState = currentState;
       goLeft();
       break;
     case 2:
-       previousState = currentState;
       goRight();
       break;
     case 3:
-      previousState = currentState;
       goForward();
   }
 }
