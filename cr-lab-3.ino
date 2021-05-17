@@ -26,9 +26,8 @@ void applyPower(int power, int motor){
   }
 }
 
-int speed = 60;
+int speed = 50;
 int currentState = 3;
-int previousState = 3;
 
 void goRight(){
   Serial.print("Going Right");
