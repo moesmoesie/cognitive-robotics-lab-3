@@ -61,7 +61,6 @@ void loop() {
       goBack();
       break;
     case 1:
-      previousState = currentState;
       goLeft();
       break;
     case 2:
